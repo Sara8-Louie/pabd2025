@@ -2,7 +2,37 @@
 # Revisão de Orientação a Objetos
 # Prof. Guilherme Leal Santos
 
-print('Bem vindos!')    
+# Aula 19/09 - Orientação a Objetos
+from conta import Conta
+from cliente import Cliente
+
+cliente1 = Cliente('Stray Kids', '123.456.789-10')
+
+conta1 = Conta('Stray Kids', 1, 143, 'straykids@gmail.com', 123456789)
+print(conta1)
+
+conta1.extrato()
+conta1.deposita(100)
+conta1.extrato()
+
+conta2 = conta1
+conta2.extrato()
+conta2.saca(100)
+conta2.extrato()
+conta1.extrato()
+
+if(conta1.transfere(30) == False):
+    print('Tá liso!')
+else:
+    print('OK!')
+
+
+
+
+
+# Aula 26/09 - Listas e Funções de Alta Ordem
+
+""" print('Bem vindos!')    
 
 frutas = ['Maça', 'Banana','Laranja']
 print(frutas)
@@ -47,7 +77,8 @@ print(numeros_filtrados)
 from functools import reduce
 
 soma = reduce(lambda soma, n: soma + n, numeros)
-print(soma)
+print(soma) """
+
 
 
 
