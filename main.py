@@ -6,13 +6,37 @@
 from conta import Conta
 from cliente import Cliente
 
-cliente1 = Cliente('Stray Kids', '123.456.789-10')
-
-conta1 = Conta('Stray Kids', 1, 143, 'straykids@gmail.com', 123456789)
-print(conta1)
-
+# Aula 26/09/2025 Agregação, Composição, Modificadores de Acesso::
+cliente1 = Cliente('Stray Kids', '111.222.333-44')
+conta1 = Conta(cliente1, 1, 143, 'straykids@gmail.com', 12345678)
 conta1.extrato()
-conta1.deposita(100)
+conta1.saca(500)
+conta1.deposita(300)
+
+
+cliente2 = Cliente('Felix', '222.333.444-55')
+conta2 = Conta(cliente2, 1, 234, 'felix@outlook.com', 234567)
+conta2.extrato()
+conta2.saca(100)
+conta2.deposita(600)
+conta2.saldo = 1000000
+
+conta1.tranfere(conta2, 2000)
+conta2.saca(1000)
+
+conta1.historico.imprime()
+conta2.historico.imprime()
+
+# Sem decorator
+conta1.set_saldo(-100)
+print(conta1.get_saldo()) # getter 
+
+# Com decorator
+conta1.saldo = -100 # 
+print(conta1.saldo) # getter
+print(conta1.saldo*1.1 + conta2.saldo*1.05)
+
+"""conta1.deposita(100)
 conta1.extrato()
 
 conta2 = conta1
@@ -24,13 +48,9 @@ conta1.extrato()
 if(conta1.transfere(30) == False):
     print('Tá liso!')
 else:
-    print('OK!')
+    print('OK!')"""
 
-
-
-
-
-# Aula 26/09 - Listas e Funções de Alta Ordem
+# Aula 2??/09 - Listas e Funções de Alta Ordem
 
 """ print('Bem vindos!')    
 
