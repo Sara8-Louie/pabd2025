@@ -8,6 +8,11 @@ class Conta:
         self.pix = pix
         self._saldo = saldo
         self.historico = Historico() #composição
+        self._total_contas += 1
+
+    @property
+    def total_contas(self):
+        return self._total_contas
 
     @property
     def saldo(self):

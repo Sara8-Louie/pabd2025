@@ -2,11 +2,14 @@
 # Revisão de Orientação a Objetos
 # Prof. Guilherme Leal Santos
 
+# Aula 10/10 - Metodos estáticos, Métodos de classe,
+
+
 # Aula 19/09 - Orientação a Objetos
 from conta import Conta
 from cliente import Cliente
 
-# Aula 26/09/2025 Agregação, Composição, Modificadores de Acesso::
+'''# Aula 26/09/2025 Agregação, Composição, Modificadores de Acesso:
 cliente1 = Cliente('Stray Kids', '111.222.333-44')
 conta1 = Conta(cliente1, 1, 143, 'straykids@gmail.com', 12345678)
 conta1.extrato()
@@ -30,11 +33,12 @@ conta2.historico.imprime()
 # Sem decorator
 conta1.set_saldo(-100)
 print(conta1.get_saldo()) # getter 
+print(conta1.get_saldo()*1.1 + conta2.get_saldo()*8.9)
 
 # Com decorator
 conta1.saldo = -100 # 
 print(conta1.saldo) # getter
-print(conta1.saldo*1.1 + conta2.saldo*1.05)
+print(conta1.saldo*1.1 + conta2.saldo*0.09)
 
 """conta1.deposita(100)
 conta1.extrato()
@@ -98,7 +102,7 @@ from functools import reduce
 
 soma = reduce(lambda soma, n: soma + n, numeros)
 print(soma) """
-
+'''
 
 
 
