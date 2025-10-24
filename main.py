@@ -3,25 +3,21 @@
 # Prof. Guilherme Leal Santos
 
 
-from conta import Conta
-from cliente import Cliente
-from funcionario import Funcionario
-from funcionario import Gerente
-
 #Aula 17/10 _ Polimorfismo, Classes Abstratas, Supabase
 
-connection = SupabaseConnection()
-Cliente = connection.client
+from Empresa.config.database import SupabaseConnection
+
+cliente = SupabaseConnection().client
 
 # Aula 10/10 - Métodos estáticos, métodos de classe
 # Herança e Reescrita de métodos
 
-f = Funcionario('Bartô Galeno', '111.222.333-44', 50000)
+'''f = Funcionario('Bartô Galeno', '111.222.333-44', 50000)
 print(f.get_bonificacao())
 print(f)
 g = Gerente('Reginaldo Rossi', '777.222.333-88', 250000, 1234, 10)
 print(g.get_bonificacao())
-print(g)
+print(g)'''
 
 
 

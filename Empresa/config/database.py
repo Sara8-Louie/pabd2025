@@ -8,7 +8,7 @@ load_dotenv()
 
 class SupabaseConnection:
     '''
-    Padraõ de Projeto - Singleton 
+    Padrão de Projeto - Singleton 
     * Garante apenas uma instancia em toda a aplicação
     '''
     _instance = None
