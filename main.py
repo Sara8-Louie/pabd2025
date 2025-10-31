@@ -5,9 +5,20 @@
 
 #Aula 17/10 _ Polimorfismo, Classes Abstratas, Supabase
 
-from Empresa.config.database import SupabaseConnection
+from supabase import Client
+from empresa.config.database import SupabaseConnection
+from empresa.dao.funcionario_dao import FuncionarioDAO
 
 cliente = SupabaseConnection().client
+
+# Criando DAO para acessar a tabela funcionario
+funcionario_dao= FuncionarioDAO(Client)
+
+for funcionario in funcionario_dao.read_all():
+    print(funcionario)
+
+# CRUD: Create, Read, Update, Delete - 31/10
+
 
 # Aula 10/10 - Métodos estáticos, métodos de classe
 # Herança e Reescrita de métodos
