@@ -5,17 +5,34 @@
 
 #Aula 17/10 _ Polimorfismo, Classes Abstratas, Supabase
 
-from supabase import Client
+
 from empresa.config.database import SupabaseConnection
+from empresa.dao.departamento_dao import DepartamentoDAO
 from empresa.dao.funcionario_dao import FuncionarioDAO
 
-cliente = SupabaseConnection().client
+client = SupabaseConnection().client
 
 # Criando DAO para acessar a tabela funcionario
-funcionario_dao= FuncionarioDAO(Client)
+funcionario_dao= FuncionarioDAO(client)
 
+table_name = 'Funcionario'
+
+# Read All
 for funcionario in funcionario_dao.read_all():
     print(funcionario)
+
+# Read
+f = funcionario_dao.read('cpf', '11122233344')
+print(f)
+
+print("-----Departamentos-----")
+
+# Lendo todos os departamentos
+departamento_dao = DepartamentoDAO(client)
+
+for departamento in departamento_dao.read_all():
+    print(departamento)
+
 
 # CRUD: Create, Read, Update, Delete - 31/10
 

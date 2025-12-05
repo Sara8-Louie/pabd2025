@@ -21,36 +21,35 @@ class BaseDAO(ABC, Generic[T]):
   # Do formato JSON (dict) para o formato model (classe)
   @abstractmethod 
   def to_model(self, data: dict) -> T: # Forçando o "seu filho" a implementar o método to_model e vai ter que retornar um tipo de dado
-    raise NotImplementedError
+    pass
   
   # Do modelo de dados (T) para o formato JSON (dict)
   @abstractmethod 
   def to_dict(self, model: T) -> dict:
-    raise NotImplementedError
+    pass
   
-  ### Create
+  ### Create 
   def create(self, model: T) -> Optional[T]: #recebe um modelo genérico T
-    #Tratamento de erros
-    try:
-      data = self.to_dict(model) #conversão para dicionario
-      response = self.client.table(self.table_name).insert(data).execute() #comando para SUPABASE
-      if response.data:
-        return self.to_model(response.data[0])
-      return None #retorna
-    #Caso de errado
-    except Exception as e:
-      print(f"Erro ao criar registro: {e}") #mensagem de erro
-      return None #retorna nada
+        try:
+            data = self.to_dict(model)
+            response = self.client.table(self.table_name).insert(data).execute()
+            if response.data: 
+                return self.to_model(response.data[0])
+            return None
+        #Caso de errado
+        except Exception as e:
+            print(f"Erro ao criar registro: {e}")
+            return None
   
   ### Read 
-  def read_id(self, record_id: int) -> Optional[T]:
+  def read(self, pk: str, value: T) -> Optional[T]:
     try:
-      response = self.client.table(self.table_name).select('*').eq('id', record_id).execute()
-      if response.data:
-        return self.to_model(response.data[0])
+      response = self.client.table(self.table_name).select('*').eq(pk,value).execute()
+      if response.data and len(response.data) > 0:
+        return self.to_model (response.data[0])
       return None
     except Exception as e:
-      print(f'Erro ao buscar registro por id {record_id}: {e}')
+      print(f"Erro ao buscar registro: {e}")
       return None
     
   # Retorna todos os valores de uma tabela
@@ -65,9 +64,22 @@ class BaseDAO(ABC, Generic[T]):
       return []
   
   # Update
-  
+  def update(self, record_id: int, model: T) -> Optional[T]:
+        try:
+            data = self.to_dict(model)
+            response = self._client.table(self._table_name).update(data).eq('id', record_id).execute()
+            if response.data:
+                return self.to_model(response.data[0])
+            return None
+        except Exception as e:
+            print(f"Erro ao atualizar registro: {e}") 
+            return None
   
   # Delete
-  
-  
-  
+  def delete(self, record_id: int) -> bool: #deve retornar valores lógicos (True ou False)
+        try:
+            response = self._client.table(self._table_name).delete().eq('id', record_id).execute()
+            return bool(response.data) #Retorna verdadeiro se o registro for deletado
+        except Exception as e:
+            print(f"Erro ao deletar registro: {e}")
+            return None
