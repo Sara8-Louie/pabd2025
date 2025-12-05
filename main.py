@@ -5,7 +5,6 @@
 
 #Aula 17/10 _ Polimorfismo, Classes Abstratas, Supabase
 
-
 from empresa.config.database import SupabaseConnection
 from empresa.dao.departamento_dao import DepartamentoDAO
 from empresa.dao.funcionario_dao import FuncionarioDAO

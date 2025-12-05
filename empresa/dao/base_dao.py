@@ -52,7 +52,7 @@ class BaseDAO(ABC, Generic[T]):
       print(f"Erro ao buscar registro: {e}")
       return None
     
-  # Retorna todos os valores de uma tabela
+  # Read All
   def read_all(self) -> List[T]:
     try:
       response = self.client.table(self.table_name).select('*').execute()
@@ -64,22 +64,22 @@ class BaseDAO(ABC, Generic[T]):
       return []
   
   # Update
-  def update(self, record_id: int, model: T) -> Optional[T]:
+  def update(self, pk: str, value: T, model: T) -> Optional[T]:
         try:
             data = self.to_dict(model)
-            response = self._client.table(self._table_name).update(data).eq('id', record_id).execute()
+            response = self._client.table(self._table_name).update(data).eq(pk, value).execute()
             if response.data:
                 return self.to_model(response.data[0])
             return None
         except Exception as e:
-            print(f"Erro ao atualizar registro: {e}") 
+            print(f'Erro ao atualizar registro: {e}')
             return None
   
   # Delete
-  def delete(self, record_id: int) -> bool: #deve retornar valores lógicos (True ou False)
+  def delete(self, pk: str, value: T) -> bool:
         try:
-            response = self._client.table(self._table_name).delete().eq('id', record_id).execute()
-            return bool(response.data) #Retorna verdadeiro se o registro for deletado
+            response = self.client.table(self.table_name).delete().eq(pk, value).execute()
+            return response.status_code == 200
         except Exception as e:
-            print(f"Erro ao deletar registro: {e}")
-            return None
+            print(f'Erro ao deletar registro: {e}')
+            return False
